@@ -162,7 +162,7 @@ public class AcercaDe extends ActionBarActivity {
         b.putString("N2_32479",N2_32479);
         b.putString("N3_32479",N3_32479);
         b.putString("NP_32479",NP_32479);
-        b.putString("NF_32477",NF_32479);
+        b.putString("NF_32479",NF_32479);
 
         //Añadimos la información al intent
         intent.putExtras(b);
