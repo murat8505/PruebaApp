@@ -38,7 +38,8 @@
     <string name="tvMateria32479">Señales y Sistemas</string>
     <string name="acerca_menu">Acerca De</string>
     <string name="title_activity_acerca_de">Acerca De</string>
-    <string name="acerca">Calcular Promedio Notas p es una aplicación desarrollada por VAW APPS Version 1.0 </string>
+    <string name="acerca">Calcular Promedio Notas es una aplicación desarrollada por VAW APPS Version 1.0 </string>
+    <string name="prueba">Prueba Vlax </string>
 
 
 </resources>
