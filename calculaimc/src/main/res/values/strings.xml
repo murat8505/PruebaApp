@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CalculaIMC</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="bajo_peso">&lt;lt 18.5</string>
+</resources>

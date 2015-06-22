@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Asesorias</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="drawer_open">Drawer Abierto</string>
+    <string name="drawer_close">Drawer Cerrado</string>
+    <string name="title_activity_agregar_materias">AgregarMaterias</string>
+    <string name="titleAgregarMaterias">Agregar Materias</string>
+    <string name="titleEditarMaterias">Editar Materias</string>
+</resources>

@@ -1,0 +1,279 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".Notas"
+    android:id="@+id/rLytNotas">
+
+
+    <TextView android:text="@string/Calcular_Notas" android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/CalcularNotas"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/Title"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/llNotas"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical"
+                android:layout_below="@+id/tvNFinal">
+
+                <TableLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/tlNotas"
+                    android:layout_below="@+id/etPorcen3"
+                    android:layout_alignParentEnd="true">
+
+                    <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:baselineAligned="false"
+                        android:showDividers="middle|beginning|end|none"
+                        android:gravity="center_horizontal"
+                        android:divider="@color/glColor">
+
+                        <EditText
+                            android:layout_width="71dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:ems="10"
+                            android:id="@+id/etN1"
+                            android:hint="@string/tvN1"
+                            android:autoText="false"
+                            android:editable="false"
+                            android:layout_below="@+id/etPorcen3"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="29dp"
+                            android:layout_toStartOf="@+id/CalcularNotas"
+                            android:layout_column="0"
+                            android:textAlignment="center"
+                            android:layout_marginRight="20dp" />
+
+                        <EditText
+                            android:layout_width="71dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:ems="10"
+                            android:id="@+id/etN2"
+                            android:hint="@string/tvN2"
+                            android:autoText="false"
+                            android:editable="false"
+                            android:layout_below="@+id/etPorcen3"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="29dp"
+                            android:layout_toStartOf="@+id/CalcularNotas"
+                            android:layout_column="1" />
+
+                        <EditText
+                            android:layout_width="71dp"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:ems="10"
+                            android:id="@+id/etN3"
+                            android:hint="@string/tvN3"
+                            android:autoText="false"
+                            android:editable="false"
+                            android:layout_below="@+id/etPorcen3"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginTop="29dp"
+                            android:layout_toStartOf="@+id/CalcularNotas"
+                            android:layout_column="2"
+                            android:layout_marginLeft="20dp" />
+                    </TableRow>
+
+
+                </TableLayout>
+
+                <Button
+                    android:layout_width="104dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bCalcular"
+                    android:id="@+id/bCalcular"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:textSize="15dp"
+                    android:layout_marginTop="@dimen/abc_action_bar_icon_vertical_padding_material"
+                    android:layout_column="1"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvSugerenciaNotas" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/tvNrc"
+                android:id="@+id/tvNRC"
+                android:textSize="20dp"
+                android:textIsSelectable="true"
+                android:paddingTop="8dp"
+                android:layout_below="@+id/CalcularNotas"
+                android:layout_alignParentStart="true"
+                android:paddingBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/tvPorcen2"
+                android:id="@+id/tvN2"
+                android:textSize="15dp"
+                android:textIsSelectable="true"
+                android:layout_below="@+id/tvN1"
+                android:layout_alignStart="@+id/tvN1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/tvCreditos"
+                android:id="@+id/tvCreditos"
+                android:textSize="20dp"
+                android:textIsSelectable="true"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvMateria" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/tvPorcen1"
+                android:id="@+id/tvN1"
+                android:textSize="15dp"
+                android:textIsSelectable="true"
+                android:paddingTop="@dimen/abc_action_bar_icon_vertical_padding_material"
+                android:layout_below="@+id/CalcularNotas"
+                android:layout_alignEnd="@+id/llNotas" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/tvMateria"
+                android:id="@+id/tvMateria"
+                android:textSize="20dp"
+                android:textIsSelectable="true"
+                android:layout_below="@+id/tvNRC"
+                android:layout_alignStart="@+id/tvNRC"
+                android:layout_alignParentTop="false"
+                android:paddingTop="8dp"
+                android:paddingBottom="17dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/tvPorcen2"
+                android:id="@+id/tvN3"
+                android:textSize="15dp"
+                android:textIsSelectable="true"
+                android:layout_below="@+id/tvN2"
+                android:layout_alignStart="@+id/tvN2"
+                android:layout_alignBottom="@+id/tvMateria" />
+
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/etMateria"
+                android:textSize="18dp"
+                android:focusable="false"
+                android:text="materia"
+                android:layout_alignTop="@+id/tvMateria"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp"
+                android:textIsSelectable="true"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_toEndOf="@id/tvMateria"
+                android:layout_above="@+id/tvCreditos" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/etCreditos"
+                android:textSize="20dp"
+                android:focusable="false"
+                android:text="Creditos"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp"
+                android:layout_below="@+id/etMateria"
+                android:layout_toEndOf="@+id/tvCreditos" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/etNRC"
+                android:focusable="false"
+                android:text="nrc"
+                android:editable="false"
+                android:layout_toEndOf="@+id/tvNRC"
+                android:layout_above="@+id/tvMateria"
+                android:layout_below="@+id/CalcularNotas"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/tvNParcial"
+                android:id="@+id/tvNParcial"
+                android:textSize="20dp"
+                android:textIsSelectable="true"
+                android:layout_column="0"
+                android:layout_below="@+id/tvCreditos"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/tvNFinal"
+                android:id="@+id/tvNFinal"
+                android:textSize="20dp"
+                android:textIsSelectable="true"
+                android:layout_column="0"
+                android:layout_below="@+id/tvNParcial"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/etNParcial"
+                android:focusable="false"
+                android:layout_above="@+id/etNFinal"
+                android:layout_toEndOf="@+id/tvNParcial"
+                android:layout_below="@+id/etCreditos"
+                android:paddingBottom="2dp"
+                android:paddingTop="8dp"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/etNFinal"
+                android:focusable="false"
+                android:layout_toEndOf="@+id/tvNFinal"
+                android:layout_alignTop="@+id/tvNFinal"
+                android:paddingTop="8dp"
+                android:paddingBottom="2dp"
+                android:textSize="20dp" />
+
+</RelativeLayout>

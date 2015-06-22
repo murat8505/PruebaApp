@@ -1,0 +1,10 @@
+<resources>
+    <string name="nombre">Escriba su Nombre:</string>
+    <string name="Enviar">Enviar</string>
+    <string name="title_activity_saludo">Hola</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Saludo App</string>
+    <string name="action_settings">Settings</string>
+
+</resources>

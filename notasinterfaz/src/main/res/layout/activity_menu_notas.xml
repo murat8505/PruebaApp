@@ -1,0 +1,81 @@
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <!-- Contenido Principal -->
+    <FrameLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF">
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:layout_gravity="center_horizontal|top"
+            android:src="@mipmap/notas"
+            android:layout_marginTop="80dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Consulta, calcula, decide."
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal|top"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="¿Para que sirve el modulo de Notas?"
+            android:id="@+id/textView2"
+            android:layout_gravity="center_horizontal|top"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_marginTop="280dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="80dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="El modulo de notas ofrece variadas herramientas, las cuales permitiran: "
+
+            android:id="@+id/textView3"
+            android:layout_gravity="center_horizontal|top"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical"
+            android:layout_marginTop="360dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textAlignment="gravity" />
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView"
+            android:layout_marginTop="440dp"
+            android:background="@android:color/white" />
+
+    </FrameLayout>
+
+    <!-- Menú Lateral -->
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:choiceMode="singleChoice"
+        android:divider="@color/accent" />
+
+</android.support.v4.widget.DrawerLayout>
+

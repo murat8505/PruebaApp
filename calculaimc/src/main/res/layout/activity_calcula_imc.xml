@@ -1,0 +1,208 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/scrollView">
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/horizontalScrollView" >
+
+        <RelativeLayout  android:layout_width="match_parent"
+            android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".CalculaIMC">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/LytVertical"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Calcule su IMC"
+                    android:id="@+id/tvCalcIMC"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ingrese su Peso En Kg"
+                    android:id="@+id/tvIngresePeso" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/EtPeso" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ingrese su altura en Metros"
+                    android:id="@+id/TvMetros" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:ems="10"
+                    android:id="@+id/EtMetros"
+                    android:layout_gravity="center_horizontal" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Calcular"
+                    android:id="@+id/btnCalcular"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/tvResultado" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/textView" />
+
+            </LinearLayout>
+
+
+            <TableLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@+id/LytVertical"
+                    android:layout_alignParentStart="true"
+                    android:textAlignment="center"
+                    android:theme="@style/AppTheme"
+                    android:padding="3dp"
+                    android:paddingEnd="3dp"
+                    android:paddingStart="3dp"
+                    android:dividerPadding="3dp">
+
+                    <TableRow>
+                        <TextView android:text="Clasificación" />
+                        <TextView android:text="IMC (Kg/m²)"
+                            android:layout_span="2" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text=" " />
+                        <TextView android:text="Valores Principales" />
+                        <TextView android:text="Valores Adicionales" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="Bajo Peso"
+                            android:padding="3dp" />
+                        <TextView android:text= " &lt; 18.50" />
+                        <TextView android:text= " &lt; 18.50" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="     Delgadez Severa"
+                            android:padding="1dp" />
+                        <TextView android:text=" &lt; 16.00" />
+                        <TextView android:text=" &lt; 16.00" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="     Delgadez Moderada"
+                            android:padding="1dp" />
+                        <TextView android:text=" 16.00 - 16.99" />
+                        <TextView android:text=" 16.00 - 16.99" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="     Delgadez Leve"
+                            android:padding="1dp" />
+                        <TextView android:text=" 17.00 - 18.49" />
+                        <TextView android:text=" 17.00 - 18.49" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="Normal"
+                            android:padding="3dp" />
+                        <TextView android:text=" 18.5 - 24.99"/>
+                        <TextView android:text=" 18.50 - 22.99" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text=" 23.00 - 24.99"
+                            android:layout_column="2" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="Sobrepeso"
+                            android:padding="3dp"/>
+                        <TextView android:text=" &gt;= 25.00 " />
+                        <TextView android:text=" &gt;= 25.00 " />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="     Preobeso"
+                            android:padding="1dp" />
+                        <TextView android:text=" 25.00 - 29.99" />
+                        <TextView android:text=" 25.00 - 27.49"/>
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text=" 27.50 - 29.99 "
+                            android:layout_column="2" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="Obesidad"
+                            android:padding="3dp"/>
+                        <TextView android:text=" &gt;= 30.00 " />
+                        <TextView android:text=" &gt;= 30.00 " />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="     Obesidad leve"
+                            android:padding="1dp" />
+                        <TextView android:text=" 30.00 - 34.99 " />
+                        <TextView android:text=" 30.00 - 32.49 " />
+                    </TableRow>
+                    <TableRow>
+                        <TextView android:text=" 32.50 - 34.99 "
+                            android:layout_column="2" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView android:text="     Obesidad media"
+                            android:padding="1dp" />
+                        <TextView android:text=" 35.00 - 39.99 " />
+                        <TextView android:text=" 35.00 - 37.49 " />
+                    </TableRow>
+                    <TableRow>
+                        <TextView android:text=" 37.50 - 39.99 "
+                            android:layout_column="2" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView android:text="     Obesidad morbida"
+                            android:padding="1dp" />
+                        <TextView android:text=" &gt;= 40.00 " />
+                        <TextView android:text=" &gt;= 40.00 " />
+                    </TableRow>
+
+                    </TableLayout>
+
+
+        </RelativeLayout>
+    </HorizontalScrollView>
+</ScrollView>

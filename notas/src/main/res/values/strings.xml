@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">Notas</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_calcular">Calcular</string>
+    <string name="action_notas">Pantalla Notas</string>
+    <string name="Calcular_Notas">Calcular Promedio Notas</string>
+    <string name="tvPorcen1">1 Corte 30%</string>
+    <string name="tvPorcen2">2 Corte 35%</string>
+    <string name="tvPorcen3">3 Corte 35%</string>
+    <string name="tvN1">1 Corte</string>
+    <string name="tvN2">2 Corte</string>
+    <string name="tvN3">3 Corte</string>
+    <string name="tvNrc">NRC: </string>
+    <string name="tvMateria">Materia: </string>
+    <string name="tvCreditos">Creditos: </string>
+    <string name="bCalcular">Calcular</string>
+    <string name="bVolver">Regresar</string>
+    <string name="title_activity_pantalla_notas">Pantalla Notas</string>
+    <string name="action_settings">Settings</string>
+    <string name="tvNRC">NRC  </string>
+    <string name="tvNombreMateria">Materia  </string>
+    <string name="tvNParcial">Nota Parcial:  </string>
+    <string name="tvNFinal">Nota Final:  </string>
+    <string name="tvNumCreditos">Creditos</string>
+    <string name="tvCarrera">Carrera: Ingenieria de Sistemas</string>
+    <string name="tvCampus">Campus: Pance - Unicatolica</string>
+    <string name="tvPeriodo">Periodo: 201560 Pregrado Presencial</string>
+    <string name="tvNivel">Nivel: Pregrado</string>
+    <string name="tvCalificaciones">Calificaciones Alumno</string>
+
+    <string name="tvMateria33496">Auditoria de Sistemas</string>
+    <string name="tvMateria32477">Seminarios</string>
+    <string name="tvMateria33497">Electiva (IV)</string>
+    <string name="tvMateria33615">Inteligencia Artificial</string>
+    <string name="tvMateria29163">Matematicas Discretas</string>
+    <string name="tvMateria29330">Identificacion</string>
+    <string name="tvMateria32479">Señales y Sistemas</string>
+    <string name="acerca_menu">Acerca De</string>
+    <string name="title_activity_acerca_de">Acerca De</string>
+    <string name="acerca">Calcular Promedio Notas es una aplicación desarrollada por VAW APPS Version 1.0 </string>
+
+
+</resources>

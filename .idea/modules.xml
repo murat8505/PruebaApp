@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/PruebaApp.iml" filepath="$PROJECT_DIR$/PruebaApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/asesorias/asesorias.iml" filepath="$PROJECT_DIR$/asesorias/asesorias.iml" />
+      <module fileurl="file://$PROJECT_DIR$/calculaimc/calculaimc.iml" filepath="$PROJECT_DIR$/calculaimc/calculaimc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notas/notas.iml" filepath="$PROJECT_DIR$/notas/notas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notasinterfaz/notasinterfaz.iml" filepath="$PROJECT_DIR$/notasinterfaz/notasinterfaz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/notasmaterial/notasmaterial.iml" filepath="$PROJECT_DIR$/notasmaterial/notasmaterial.iml" />
+    </modules>
+  </component>
+</project>
