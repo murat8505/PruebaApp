@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -26,11 +30,8 @@ public class pantallaNotas extends ActionBarActivity {
 
     private SQLiteDatabase db;
     private NotasSQLiteHelper usdbh;
-    private Cursor c;
     private RecyclerView recView;
     private ArrayList<Titular> datos;
-    SearchView search;
-    String mSearchString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,35 @@ public class pantallaNotas extends ActionBarActivity {
         // Habilitas icono
         Toolbar toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        String [] spin = spinner();
+        //Appbar page filter
+        Spinner cmbToolbar = (Spinner) findViewById(R.id.CmbToolbar);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                getSupportActionBar().getThemedContext(),
+                R.layout.appbar_filter_title,new String[] {"Opcion 1","Opcion 2"});
+
+        adapter.setDropDownViewResource(R.layout.appbar_filter_list);
+
+        cmbToolbar.setAdapter(adapter);
+
+        cmbToolbar.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //... Acciones al seleccionar una opción de la lista
+                Log.i("Toolbar 3", "Seleccionada opción " + i);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                //... Acciones al no existir ningún elemento seleccionado
+                getSupportActionBar().setTitle("Todos");
+            }
+        });
         datos = new ArrayList<Titular>();
-        buscar("");
+        //buscar("");
 
     }
 
@@ -50,7 +77,7 @@ public class pantallaNotas extends ActionBarActivity {
         Intent intent = new Intent(pantallaNotas.this, Notas.class);
         //Creamos la información a pasar entre actividades
         Bundle b = new Bundle();
-        b.putString("etNRC",nrc1);
+        b.putString("etNRC", nrc1);
         //Añadimos la información al intent
         intent.putExtras(b);
 
@@ -58,6 +85,53 @@ public class pantallaNotas extends ActionBarActivity {
         startActivity(intent);
                 
     }
+
+    public String[] spinner(){
+
+        int tamaño=0;
+        usdbh = new NotasSQLiteHelper(this, "vawnotas", null, 1);
+        db = usdbh.getWritableDatabase();
+        //Si hemos abierto correctamente la base de datos
+        if(db != null)
+        {
+            Cursor c = db.rawQuery("SELECT Count(p.idPeriodo) FROM materiasMatriculadas mm, periodo p \n" +
+                    "WHERE mm.idPeriodo = p.idPeriodo\n" +
+                    "group by p.idPeriodo", null);
+
+            //Nos aseguramos de que existe al menos un registro
+            if (c.moveToFirst()) {
+                //Recorremos el cursor hasta que no haya más registros
+                do {
+                    tamaño = Integer.parseInt(c.getString(0));
+                } while(c.moveToNext());
+            }
+        }
+
+        String spin[] = new String[tamaño];
+        int i=0;
+        //Si hemos abierto correctamente la base de datos
+        if(db != null)
+        {
+            Cursor c = db.rawQuery("SELECT p.idPeriodo FROM materiasMatriculadas mm, periodo p \n" +
+                    "WHERE mm.idPeriodo = p.idPeriodo\n" +
+                    "group by p.idPeriodo", null);
+
+            //Nos aseguramos de que existe al menos un registro
+            if (c.moveToFirst()) {
+                //Recorremos el cursor hasta que no haya más registros
+                do {
+                    spin[i] = c.getString(0);
+                } while(c.moveToNext());
+            }
+
+            //Cerramos la base de datos
+            db.close();
+        }
+
+        return spin;
+
+    }
+
     public void buscar(String busca){
         datos.clear();
 
@@ -72,7 +146,16 @@ public class pantallaNotas extends ActionBarActivity {
         //Si hemos abierto correctamente la base de datos
         if(db != null)
         {
-            Cursor c = db.rawQuery(" select nom_mat, nota1, nota2, nota3, notap,m.cod_mat from materias m, materias_alumno ma where m.cod_mat = ma.cod_mat and lower(nom_mat) like lower('%"+busca+"%')", null);
+            Cursor c = db.rawQuery("SELECT mm.idMateriaMatriculada, m.nomMateria, sum(n.valorNota), c.idCorte, c.desCorte \n" +
+                    "FROM materiasmatriculadas mm, notas n, materias m, corte c, materiasCorte mc\n" +
+                    "WHERE mm.idEstudianteUni ='000182598'\n" +
+                    "and n.idCorteMateriaMatriculada = mc.idCorteMateriaMatriculada\n" +
+                    "and mm.idMateriaMatriculada = mc.idMateriaMatriculada\n" +
+                    "and m.idMateria = mm.idMateria\n" +
+                    "and c.idCorte = mc.idCorte\n" +
+                    "and lower(m.nomMateria) like lower('%"+busca+"%')\n" +
+                    "group by mm.idMateriaMatriculada, m.nomMateria,c.idCorte, c.desCorte \n" +
+                    "order by m.nomMateria, c.idCorte", null);
 
             //Nos aseguramos de que existe al menos un registro
             if (c.moveToFirst()) {

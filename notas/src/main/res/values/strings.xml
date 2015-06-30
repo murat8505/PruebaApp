@@ -40,6 +40,7 @@
     <string name="title_activity_acerca_de">Acerca De</string>
     <string name="acerca">Calcular Promedio Notas es una aplicación desarrollada por VAW APPS Version 1.0 </string>
     <string name="prueba">Prueba Vlax </string>
+    <string name="spinner">Todos</string>
 
 
 </resources>

@@ -10,21 +10,24 @@
         app:showAsAction="ifRoom|collapseActionView"
         android:title="Buscar Materias">
     </item>
-    <item
+
+    <item android:id="@+id/action_settings"
+        android:icon="@drawable/ic_menu_white_24dp"
+        android:title="@string/action_settings"
+        android:orderInCategory="12"
+        app:showAsAction="ifRoom|collapseActionView" />
+    <!-- <item
         android:id="@+id/wizard"
         android:icon="@drawable/ic_arrow_back_white_24dp"
         android:orderInCategory="90"
         app:showAsAction="ifRoom"
         android:title="Retornar">
     </item>
-    <!-- Search, should appear as action button
+    Search, should appear as action button
     <item android:id="@+id/action_reload"
         android:icon="@drawable/ic_arrow_back_white_24dp"
         android:title="retornar"
         app:showAsAction="ifRoom" />
     Settings, should always be in the overflow
-    <item android:id="@+id/action_settings"
-        android:icon="@drawable/ic_menu_white_24dp"
-        android:title="@string/action_settings"
-        app:showAsAction="ifRoom" />-->
+    -->
 </menu>
