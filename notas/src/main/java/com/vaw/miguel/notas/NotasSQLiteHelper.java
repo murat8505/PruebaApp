@@ -32,7 +32,7 @@ public class NotasSQLiteHelper extends SQLiteOpenHelper {
     String sqlCreate16 = "INSERT INTO estudianteuni (idEstudianteUni, cedEst, idUniverCiu) VALUES ('000182598', '1144076394', 'CALFUCLG001')";
     String sqlCreate17 = "INSERT INTO periodo (idPeriodo, descSemestre, periodo, ano) VALUES ('2015-01', 'Primer Semestre 2015', '01', '2015'), ('2015-03', 'Cursos Intersemestrales', '03', '2015')";
     String sqlCreate18 = "INSERT INTO materias (idMateria, idUniverCiu, nomMateria) VALUES ('106', 'CALFUCLG001', 'Ingles IV'), ('33496', 'CALFUCLG001', 'Auditoria de Sistemas'), ('32477', 'CALFUCLG001', 'Seminarios'), ('33615', 'CALFUCLG001', 'Inteligencia Artificial'), ('33497', 'CALFUCLG001', 'Electiva IV'), ('29163', 'CALFUCLG001', 'Matematicas Discretas'), ('29330', 'CALFUCLG001', 'Identificación'), ('32479', 'CALFUCLG001', 'Señales y Sistemas')";
-    String sqlCreate19 = "INSERT INTO corte (idCorte, desCorte) VALUES ('C001', 'Primer Corte'), ('C002', 'Segundo Corte'), ('C003', 'Tercer Corte'), ('C004', 'Cuarto Corte'), ('C005', 'Quinto Corte')";
+    String sqlCreate19 = "INSERT INTO corte (idCorte, desCorte) VALUES ('C001', 'Corte 1'), ('C002', 'Corte 2'), ('C003', 'Corte 3'), ('C004', 'Corte 4'), ('C005', 'Corte 5')";
     String sqlCreate20 = "INSERT INTO docentes (idDocentes, nomDocente, apeDocente, idUniverCiu) VALUES ('D00000', 'Sin Asignar', NULL, 'CALFUCLG001'), ('D00001', 'Carlos Alfonso', 'Lozano Caicedo', 'CALFUCLG001'), ('D00002', 'Enrique', 'Peña Fajardo', 'CALFUCLG001'), ('D00003', 'Victor Hugo', 'Hernandez Valencia', 'CALFUCLG001'), ('D00004', 'Juan', 'Rodriguez Ramirez', 'CALFUCLG001'), ('D00005', 'Alexander', 'Campo Ramirez', 'CALFUCLG001'), ('D00006', 'Alejandro', 'Paz Parra', 'CALFUCLG001'), ('D00007', 'Forbes', 'Pennington', 'CALFUCLG001')";
     String sqlCreate21 = "INSERT INTO materiasmatriculadas (idMateriaMatriculada, idPeriodo, idMateria, idDocentes, idEstudianteUni) VALUES ('1144076394-106', '2015-03', '106', 'D00007', '000182598'), ('1144076394-29163', '2015-01', '29163', 'D00004', '000182598'), ('1144076394-29330', '2015-01', '29330', 'D00005', '000182598'), ('1144076394-32477', '2015-01', '32477', 'D00002', '000182598'), ('1144076394-32479', '2015-01', '32479', 'D00006', '000182598'), ('1144076394-33496', '2015-01', '33496', 'D00001', '000182598'), ('1144076394-33497', '2015-01', '33497', 'D00003', '000182598'), ('1144076394-33615', '2015-01', '33615', 'D00001', '000182598')";
 
@@ -88,9 +88,9 @@ public class NotasSQLiteHelper extends SQLiteOpenHelper {
         //      a la nueva, por lo que este método debería ser más elaborado.
 
         //Se elimina la versión anterior de la tabla
-        db.execSQL("DROP TABLE IF EXISTS materias_alumno");
+        /*db.execSQL("DROP TABLE IF EXISTS materias_alumno");
         db.execSQL("DROP TABLE IF EXISTS materias");
-        db.execSQL("DROP TABLE IF EXISTS estudiante");
+        db.execSQL("DROP TABLE IF EXISTS estudiante");*/
 
         //Se crea la nueva versión de la tabla
         db.execSQL(sqlCreate);

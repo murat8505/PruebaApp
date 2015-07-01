@@ -32,6 +32,7 @@ public class pantallaNotas extends ActionBarActivity {
     private NotasSQLiteHelper usdbh;
     private RecyclerView recView;
     private ArrayList<Titular> datos;
+    private Spinner cmbToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,16 @@ public class pantallaNotas extends ActionBarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        String [] spin = spinner();
+        usdbh = new NotasSQLiteHelper(this, "vawnotas", null, 1);
+        db = usdbh.getWritableDatabase();
+        String[] spin = spinner();
+
         //Appbar page filter
-        Spinner cmbToolbar = (Spinner) findViewById(R.id.CmbToolbar);
+       cmbToolbar = (Spinner) findViewById(R.id.CmbToolbar);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 getSupportActionBar().getThemedContext(),
-                R.layout.appbar_filter_title,new String[] {"Opcion 1","Opcion 2"});
+                R.layout.appbar_filter_title,spin);
 
         adapter.setDropDownViewResource(R.layout.appbar_filter_list);
 
@@ -59,6 +63,7 @@ public class pantallaNotas extends ActionBarActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //... Acciones al seleccionar una opción de la lista
                 Log.i("Toolbar 3", "Seleccionada opción " + i);
+                buscar("");
             }
 
             @Override
@@ -68,7 +73,7 @@ public class pantallaNotas extends ActionBarActivity {
             }
         });
         datos = new ArrayList<Titular>();
-        //buscar("");
+        buscar("");
 
     }
 
@@ -86,17 +91,15 @@ public class pantallaNotas extends ActionBarActivity {
                 
     }
 
-    public String[] spinner(){
-
+    public int tamSpinner(){
         int tamaño=0;
-        usdbh = new NotasSQLiteHelper(this, "vawnotas", null, 1);
-        db = usdbh.getWritableDatabase();
+
+        //usdbh = new NotasSQLiteHelper(this, "vawnotas", null, 1);
+        //db = usdbh.getWritableDatabase();
         //Si hemos abierto correctamente la base de datos
         if(db != null)
         {
-            Cursor c = db.rawQuery("SELECT Count(p.idPeriodo) FROM materiasMatriculadas mm, periodo p \n" +
-                    "WHERE mm.idPeriodo = p.idPeriodo\n" +
-                    "group by p.idPeriodo", null);
+            Cursor c = db.rawQuery("select count(*) from (SELECT p.idPeriodo FROM materiasMatriculadas mm, periodo p WHERE mm.idPeriodo = p.idPeriodo group by p.idPeriodo)", null);
 
             //Nos aseguramos de que existe al menos un registro
             if (c.moveToFirst()) {
@@ -105,27 +108,37 @@ public class pantallaNotas extends ActionBarActivity {
                     tamaño = Integer.parseInt(c.getString(0));
                 } while(c.moveToNext());
             }
+            //Cerramos la base de datos
+            //db.close();
         }
 
-        String spin[] = new String[tamaño];
+        return tamaño;
+    }
+
+    public String[] spinner(){
+
+        int tamaño = tamSpinner();
+        String spin[] = new String[tamaño+1];
         int i=0;
+        spin[i] = "Todos";
+        i++;
         //Si hemos abierto correctamente la base de datos
         if(db != null)
         {
-            Cursor c = db.rawQuery("SELECT p.idPeriodo FROM materiasMatriculadas mm, periodo p \n" +
-                    "WHERE mm.idPeriodo = p.idPeriodo\n" +
-                    "group by p.idPeriodo", null);
+            Cursor d = db.rawQuery("SELECT p.idPeriodo FROM materiasMatriculadas mm, periodo p WHERE mm.idPeriodo = p.idPeriodo group by p.idPeriodo ", null);
+
 
             //Nos aseguramos de que existe al menos un registro
-            if (c.moveToFirst()) {
+            if (d.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
                 do {
-                    spin[i] = c.getString(0);
-                } while(c.moveToNext());
+                    spin[i] = "Periodo "+d.getString(0);
+                    i++;
+                } while(d.moveToNext());
             }
 
             //Cerramos la base de datos
-            db.close();
+            //db.close();
         }
 
         return spin;
@@ -134,39 +147,108 @@ public class pantallaNotas extends ActionBarActivity {
 
     public void buscar(String busca){
         datos.clear();
-
         recView = (RecyclerView) findViewById(R.id.RecView);
         recView.removeAllViews();
         recView.clearAnimation();
 
-        usdbh = new NotasSQLiteHelper(this, "vawnotas", null, 1);
+        if(db != null){
+            String s= cmbToolbar.getSelectedItem().toString();
+            s=s.replaceAll("Periodo ","");
+            busca = busca.toLowerCase();
+            String select ="";
+            if (s.equals("Todos")){
+                select ="SELECT mm.idMateriaMatriculada, m.nomMateria, sum(n.valorNota), c.idCorte, c.desCorte " +
+                        "FROM materiasmatriculadas mm, notas n, materias m, corte c, materiasCorte mc " +
+                        "WHERE mm.idEstudianteUni ='000182598' and n.idCorteMateriaMatriculada = mc.idCorteMateriaMatriculada " +
+                        "and mm.idMateriaMatriculada = mc.idMateriaMatriculada and m.idMateria = mm.idMateria " +
+                        "and c.idCorte = mc.idCorte and (lower(m.nomMateria) like '%"+busca+"%' or" +
+                        " lower(m.nomMateria) like '%"+busca+"' or lower(m.nomMateria) like '"+busca+"%' or lower(m.nomMateria) like '"+busca+"') " +
+                        "group by mm.idMateriaMatriculada, m.nomMateria,c.idCorte, c.desCorte order by m.nomMateria, c.idCorte";
+            }else{
+                select ="SELECT mm.idMateriaMatriculada, m.nomMateria, sum(n.valorNota), c.idCorte, c.desCorte " +
+                        "FROM materiasmatriculadas mm, notas n, materias m, corte c, materiasCorte mc " +
+                        "WHERE mm.idEstudianteUni ='000182598' and n.idCorteMateriaMatriculada = mc.idCorteMateriaMatriculada " +
+                        "and mm.idMateriaMatriculada = mc.idMateriaMatriculada and m.idMateria = mm.idMateria " +
+                        "and mm.idPeriodo = '"+s+"' " +
+                        "and c.idCorte = mc.idCorte and (lower(m.nomMateria) like '%"+busca+"%' or" +
+                        " lower(m.nomMateria) like '%"+busca+"' or lower(m.nomMateria) like '"+busca+"%' or lower(m.nomMateria) like '"+busca+"') " +
+                        "group by mm.idMateriaMatriculada, m.nomMateria,c.idCorte, c.desCorte order by m.nomMateria, c.idCorte";
+            }
 
-        db = usdbh.getWritableDatabase();
-
-        //Si hemos abierto correctamente la base de datos
-        if(db != null)
-        {
-            Cursor c = db.rawQuery("SELECT mm.idMateriaMatriculada, m.nomMateria, sum(n.valorNota), c.idCorte, c.desCorte \n" +
-                    "FROM materiasmatriculadas mm, notas n, materias m, corte c, materiasCorte mc\n" +
-                    "WHERE mm.idEstudianteUni ='000182598'\n" +
-                    "and n.idCorteMateriaMatriculada = mc.idCorteMateriaMatriculada\n" +
-                    "and mm.idMateriaMatriculada = mc.idMateriaMatriculada\n" +
-                    "and m.idMateria = mm.idMateria\n" +
-                    "and c.idCorte = mc.idCorte\n" +
-                    "and lower(m.nomMateria) like lower('%"+busca+"%')\n" +
-                    "group by mm.idMateriaMatriculada, m.nomMateria,c.idCorte, c.desCorte \n" +
-                    "order by m.nomMateria, c.idCorte", null);
-
+            Cursor c = db.rawQuery(select, null);
+            String id="",id_aux="", nomMateria="";
+            String [] nombre = {"","","",""};
+            String [] valor = {"","","",""};
+            int i=0;
             //Nos aseguramos de que existe al menos un registro
             if (c.moveToFirst()) {
                 //Recorremos el cursor hasta que no haya más registros
                 do {
-                    datos.add(new Titular(c.getString(5),c.getString(0), "Corte 1: "+c.getString(1), "Corte 2: "+c.getString(2), "Corte 3: "+c.getString(3), "Nota Final: "+c.getString(4)));
+                    id_aux=id;
+                    id=c.getString(0);
+
+                    if (!id_aux.equals(id)){
+
+                        if (i>0){
+                            int a=0,j=0;
+                            float vlr=0;
+                            while(a==0){
+                                if (nombre[j].equals(null)||nombre[j].equals("")){
+                                    nombre[j] = "Nota Final ";
+
+                                    vlr = Math.round((vlr/j)*10);
+                                    vlr = vlr /10;
+
+                                    valor[j] = ""+vlr;
+                                    a=1;
+                                }else{
+                                    vlr += Float.parseFloat(valor[j]);
+                                }
+                                j++;
+                            }
+                            datos.add(new Titular(id_aux,nomMateria, nombre[0]+valor[0], nombre[1]+valor[1], nombre[2]+valor[2], nombre[3]+valor[3]));
+                        }
+                        for(int k=0;k<nombre.length;k++){
+                            nombre[k]="";
+                            valor[k]="";
+                        }
+                        i=0;
+                        nomMateria = c.getString(1);
+                        valor[i] = c.getString(2);
+                        nombre[i] = c.getString(4)+"    ";
+                    }else{
+                        valor[i] = c.getString(2);
+                        nombre[i] = c.getString(4)+"    ";
+                    }
+
+                    i++;
+
+                    //datos.add(new Titular(c.getString(5),c.getString(0), "Corte 1: "+c.getString(1), "Corte 2: "+c.getString(2), "Corte 3: "+c.getString(3), "Nota Final: "+c.getString(4)));
                 } while(c.moveToNext());
+
+                if (i>0){
+                    int a=0,j=0;
+                    float vlr=0;
+                    while(a==0){
+                        if (nombre[j].equals(null)||nombre[j].equals("")){
+                            nombre[j] = "Nota Final ";
+
+                            vlr = Math.round((vlr/j)*10);
+                            vlr = vlr /10;
+
+                            valor[j] = ""+vlr;
+                            a=1;
+                        }else{
+                            vlr += Float.parseFloat(valor[j]);
+                        }
+                        j++;
+                    }
+                    datos.add(new Titular(id_aux,nomMateria, nombre[0]+valor[0], nombre[1]+valor[1], nombre[2]+valor[2], nombre[3]+valor[3]));
+                }
             }
 
             //Cerramos la base de datos
-            db.close();
+           // db.close();
         }
 
 
@@ -177,7 +259,7 @@ public class pantallaNotas extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Log.i("DemoRecView", "Pulsado el elemento " + recView.getChildPosition(v));
-                retornarPantalla(datos.get(recView.getChildPosition(v)).getCodigo());
+                //retornarPantalla(datos.get(recView.getChildPosition(v)).getCodigo());
             }
         });
 
